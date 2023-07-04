@@ -1,1 +1,23 @@
-<p>compras works!</p>
+<div class="container mt-2">
+  <div class="card p-1">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Fecha</th>
+          <th scope="col">Completada</th>
+          <th scope="col">Total</th>
+          <th scope="col">Detalle</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let compra of compras">
+          <td>{{compra.fecha}}</td>
+          <td *ngIf="compra.completada; else finalizada">Si</td>
+          <ng-template #finalizada><td>No</td></ng-template>
+          <td>{{compra.total}} €</td>
+          <td><button class="btn btn-warning btn-sm" (click)="cargarDetalleCompra(compra.id)">Ver detalle</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
