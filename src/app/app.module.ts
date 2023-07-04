@@ -7,6 +7,8 @@ import { ProductosComponent } from './component/productos/productos.component';
 import { DetallesComponent } from './component/detalles/detalles.component';
 import { ComprasComponent } from './component/compras/compras.component';
 import { CategoriasComponent } from './component/categorias/categorias.component';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { CategoriasComponent } from './component/categorias/categorias.component
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

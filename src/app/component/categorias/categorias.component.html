@@ -1,1 +1,10 @@
-<p>categorias works!</p>
+<div class="row">
+  <div class="col-auto me-3 mt-3" *ngFor="let cat of categorias">
+    <button class="btn btn-info" (click)="verProductosPorCategoria(cat.id)">{{cat.nombre}}</button>
+  </div>
+</div>
+<div class="row">
+  <div class="col-auto me-3 mt-3">
+    <h3><button class="btn btn-warning">Nueva categoría +</button></h3>
+  </div>
+</div>
