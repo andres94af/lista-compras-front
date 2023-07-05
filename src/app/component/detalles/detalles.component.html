@@ -1,1 +1,24 @@
-<p>detalles works!</p>
+<h3>{{titulo}}</h3>
+<div class="card p-1">
+  <table class="table table-borderless text-center">
+    <thead>
+      <tr>
+        <th scope="col">Item</th>
+        <th scope="col">Producto</th>
+        <th scope="col">Cant.</th>
+        <th scope="col">Precio</th>
+        <th scope="col">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let detalle of detalles">
+        <td>{{detalle.id}}</td>
+        <td>{{detalle.nombre}}</td>
+        <td>{{detalle.cantidad}}</td>
+        <td>{{detalle.precio}} €</td>
+        <td>{{detalle.total}} €</td>
+      </tr>
+    </tbody>
+  </table>
+  <h6 class="text-end me-3">Total {{total}} €</h6>
+</div>

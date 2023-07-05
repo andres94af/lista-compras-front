@@ -1,5 +1,8 @@
-<div class="row">
-  <div class="col-auto me-3 mt-3" *ngFor="let prod of productos">
-    <h3><button class="btn btn-success">{{prod.nombre}} +</button></h3>
+<div class="container mt-2">
+  <h3>{{titulo}}</h3>
+  <div class="row">
+    <div class="col-auto me-3 mt-3" *ngFor="let prod of productos">
+      <h3><button class="btn btn-success">{{prod.nombre}} +</button></h3>
+    </div>
   </div>
 </div>

@@ -12,6 +12,7 @@ import { CategoriaService } from 'src/app/service/categoria.service';
 export class CategoriasComponent {
 
   categorias:Categoria[];
+  titulo:string = "Categorías";
 
   constructor(private router:Router, private categoriaService:CategoriaService){
     categoriaService.obtenerCategorias().subscribe(categoriasObt =>{

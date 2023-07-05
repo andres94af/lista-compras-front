@@ -36,5 +36,5 @@ export interface DetalleCompra {
   cantidad: number;
   precio: number;
   total: number;
-  compra: Compra;
+  // compra: Compra;
 }

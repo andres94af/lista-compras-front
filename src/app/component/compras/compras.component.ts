@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Compra } from 'src/app/models/models';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { Compra, DetalleCompra } from 'src/app/models/models';
 import { ComprasService } from 'src/app/service/compras.service';
 
 @Component({
@@ -11,6 +11,9 @@ import { ComprasService } from 'src/app/service/compras.service';
 export class ComprasComponent {
 
   compras:Compra[]
+  titulo:string = "Mis compras";
+  detalles:DetalleCompra[];
+  total:number;
 
   constructor(private compraService:ComprasService){
     //Valor quemado con 1 !!!!!!<-----------------------------------
@@ -20,10 +23,9 @@ export class ComprasComponent {
     })
   }
 
-  cargarDetalleCompra(id:number){
-    this.compraService.obtenerDetalleCompra(id).subscribe(detalleObt => {
-      console.log(detalleObt);
-    })
+  cargarDetalles(detalles:DetalleCompra[], total:number){
+    this.detalles = detalles;
+    this.total = total;
   }
 
 }
