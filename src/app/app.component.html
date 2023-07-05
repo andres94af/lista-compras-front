@@ -17,8 +17,9 @@
           <a class="nav-link" href="/compras/1">Mis compras</a>
         </li>
       </ul>
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Buscar producto" aria-label="Buscar">
+      <form class="d-flex" role="search" (submit)="buscarProducto()">
+        <input class="form-control me-2" type="search" placeholder="Buscar producto" aria-label="Buscar"
+          [(ngModel)]="valorBusqueda" name="valorBusqueda" required="true">
         <button class="btn btn-outline-info" type="submit">Buscar</button>
       </form>
     </div>
@@ -26,9 +27,5 @@
 </nav>
 
 <div class="container">
-  <div class="row">
-    <div class="col">
-      <router-outlet></router-outlet>
-    </div>
-  </div>
+  <router-outlet></router-outlet>
 </div>
