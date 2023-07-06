@@ -7,19 +7,30 @@
           <button class="btn btn-success" (click)="verDetallesDelProducto(prod)">{{prod.nombre}} +</button>
         </div>
       </div>
-      <a *ngIf="btnVisible" routerLink="/productos" class="btn btn-secondary btn-sm">Eliminar filtros</a>
+      <div class="row">
+        <div class="col-auto me-3 mt-4">
+          <button class="btn btn-warning" (click)="verFormularioNuevoProducto()"><strong>Nuevo producto
+              +</strong></button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-auto me-3 mt-4" *ngIf="btnVisible">
+          <a routerLink="/productos" class="btn btn-secondary">Eliminar filtros</a>
+        </div>
+      </div>
     </div>
 
-    <div class="col-md-4">
-      <div class="card mt-4 bg-card" *ngIf="producto">
+    <div class="col-md-4 -mt-3">
+      <div class="card mt-4 bg-card" *ngIf="producto; else formNuevoProducto">
         <img src="{{producto.imgUrl}}" class="card-img-top" alt="img producto">
         <div class="card-body">
           <h5 class="card-title">{{producto.nombre}}</h5>
           <p class="card-text">{{producto.informacion}}</p>
           <h6 class="card-text">Precio: {{producto.precioUnitario}} €</h6>
-          <form class="row g-3" (submit)="agregarALista(producto)">
+          <form class="row g-3" (submit)="agregarAListaDeCompras(producto)">
             <div class="col-auto">
-              <input type="number" class="form-control bg-card" [(ngModel)]="cantidadProducto" name="cantidadProducto" placeholder="Cantidad" required>
+              <input type="number" class="form-control bg-card" [(ngModel)]="cantidadProducto" name="cantidadProducto"
+                placeholder="Cantidad" required>
             </div>
             <div class="col-auto">
               <button type="submit" class="btn btn-warning mb-3">Agregar</button>
@@ -27,6 +38,29 @@
           </form>
         </div>
       </div>
+
+      <ng-template #formNuevoProducto>
+        <div class="card mt-4 bg-card">
+          <h4 class="mt-2 ms-2">Nuevo producto</h4>
+          <div class="card-body">
+            <form class="row g-3" (ngSubmit)="guardarNuevoProducto()">
+              <input type="text" class="form-control bg-card" placeholder="Nombre" name="nombre"
+                [(ngModel)]="datosFormulario.nombre" required>
+              <input type="text" class="form-control bg-card" placeholder="Información" name="informacion"
+                [(ngModel)]="datosFormulario.informacion" required>
+              <input type="url" class="form-control bg-card" placeholder="http://www.img.jpg" name="imgUrl"
+                [(ngModel)]="datosFormulario.imgUrl" required>
+              <select class="form-select bg-card" name="imgUrl" [(ngModel)]="datosFormulario.idCategoria">
+                <option selected>-- Seleccione una categoría --</option>
+                <option *ngFor="let categoria of categorias" value="{{categoria.id}}">{{categoria.nombre}}</option>
+              </select>
+              <input type="number" step=".05" class="form-control bg-card" placeholder="Precio unitario"
+                name="precioUnitario" [(ngModel)]="datosFormulario.precioUnitario" required>
+              <button type="submit" class="btn btn-warning mb-3">Agregar</button>
+            </form>
+          </div>
+        </div>
+      </ng-template>
     </div>
   </div>
 </div>
