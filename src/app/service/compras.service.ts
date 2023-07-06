@@ -6,15 +6,15 @@ import { Injectable } from '@angular/core';
 })
 export class ComprasService {
 
-  apiUrl: string = 'http://localhost:8080';
+  apiUrl: string = 'http://localhost:8080/compra';
 
   constructor(private http: HttpClient) { }
 
   obtenerCompras(id:number) {
-    return this.http.get(this.apiUrl + '/compra/usuario/'+id);
+    return this.http.get(this.apiUrl + '/usuario/'+id);
   }
 
   obtenerDetalleCompra(id:number){
-    return this.http.get(this.apiUrl + '/compra/detalle/'+id);
+    return this.http.get(this.apiUrl + '/detalle/'+id);
   }
 }

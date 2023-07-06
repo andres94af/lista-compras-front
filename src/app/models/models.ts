@@ -1,10 +1,10 @@
-export interface Categoria {
+export class Categoria {
   id: number;
   nombre: string;
   productos: Producto[];
 }
 
-export interface Producto {
+export class Producto {
   id: number;
   nombre: string;
   informacion: string;
@@ -13,7 +13,7 @@ export interface Producto {
   categoria: Categoria;
 }
 
-export interface Usuario {
+export class Usuario {
   id: number;
   nombre: string;
   apellido: string;
@@ -21,7 +21,7 @@ export interface Usuario {
   password: string;
 }
 
-export interface Compra {
+export class Compra {
   id: number;
   usuario: Usuario;
   fecha: Date;
@@ -30,7 +30,7 @@ export interface Compra {
   completada: boolean;
 }
 
-export interface DetalleCompra {
+export class DetalleCompra {
   id: number;
   nombre: string;
   cantidad: number;

@@ -1,13 +1,31 @@
 <div class="container mt-2">
-  <h3>{{titulo}}</h3>
   <div class="row">
-    <div class="col-auto me-3 mt-3" *ngFor="let cat of categorias">
-      <button class="btn btn-warning" (click)="verProductosPorCategoria(cat.id)">{{cat.nombre}}</button>
+    <div class="col-md-8">
+      <h3>{{titulo}}</h3>
+      <div class="row">
+        <div class="col-md-auto me-2 mt-3" *ngFor="let cat of categorias">
+          <button class="btn btn-warning" (click)="verProductosPorCategoria(cat.id)">{{cat.nombre}}</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4" *ngIf="formAgregar">
+      <div class="card mt-4 bg-card">
+        <div class="card-body">
+          <form class="row g-3" (submit)="agregarCategoria()">
+            <div class="mb-3">
+              <label for="exampleFormControlInput1" class="form-label">Nombre de la nueva categoría:</label>
+              <input type="email" class="form-control" id="exampleFormControlInput1" name="nombreCategoria" [(ngModel)]="nombreCategoria" placeholder='Ej: Enlatados'>
+            </div>
+              <button type="submit" class="btn btn-warning mb-3">Agregar</button>
+          </form>
+        </div>
+      </div>
     </div>
   </div>
+
   <div class="row">
     <div class="col-auto me-3 mt-4">
-      <button class="btn btn-warning"><strong>Nueva categoría +</strong></button>
+      <button class="btn btn-warning" (click)="nuevaCategoria()"><strong>Nueva categoría +</strong></button>
     </div>
   </div>
 </div>

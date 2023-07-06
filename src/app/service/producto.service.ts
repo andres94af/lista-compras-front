@@ -6,19 +6,19 @@ import { Injectable } from '@angular/core';
 })
 export class ProductoService {
   
-  apiUrl: string = 'http://localhost:8080';
+  apiUrl: string = 'http://localhost:8080/producto';
   
   constructor(private http: HttpClient) { }
   
   obtenerProductos() {
-    return this.http.get(this.apiUrl + '/producto');
+    return this.http.get(this.apiUrl);
   }
   
   obtenerProductosPorCategoria(id:number) {
-    return this.http.get(this.apiUrl + '/categoria/'+id);
+    return this.http.get(this.apiUrl + '/'+id);
   }
 
   obtenerProductosFiltrados(valorFiltro: string) {
-    return this.http.get(this.apiUrl + '/producto/filtrado/' + valorFiltro);
+    return this.http.get(this.apiUrl + '/filtrado/' + valorFiltro);
   }
 }

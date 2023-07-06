@@ -12,7 +12,10 @@ import { CategoriaService } from 'src/app/service/categoria.service';
 export class CategoriasComponent {
 
   categorias:Categoria[];
+  categoria:Categoria;
+  nombreCategoria:string;
   titulo:string = "Categorías";
+  formAgregar:boolean = false;
 
   constructor(private router:Router, private categoriaService:CategoriaService){
     categoriaService.obtenerCategorias().subscribe(categoriasObt =>{
@@ -22,5 +25,19 @@ export class CategoriasComponent {
 
   verProductosPorCategoria(id:number){
     this.router.navigate(["productos/" + id]);
+  }
+
+  nuevaCategoria(){
+    this.formAgregar = true;
+  }
+
+  agregarCategoria(){
+    if(this.nombreCategoria != undefined){
+      this.categoria = new Categoria();
+      this.categoria.nombre = this.nombreCategoria;
+      this.categoriaService.agregarCategoria(this.categoria).subscribe(datos => {
+        window.location.reload();
+      });
+    }
   }
 }
