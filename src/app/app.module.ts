@@ -10,6 +10,7 @@ import { CategoriasComponent } from './component/categorias/categorias.component
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { InicioComponent } from './component/inicio/inicio.component';
+import { FooterComponent } from './component/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { InicioComponent } from './component/inicio/inicio.component';
     DetallesComponent,
     ComprasComponent,
     CategoriasComponent,
-    InicioComponent
+    InicioComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
