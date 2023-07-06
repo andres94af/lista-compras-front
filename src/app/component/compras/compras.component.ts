@@ -11,7 +11,7 @@ import { ComprasService } from 'src/app/service/compras.service';
 export class ComprasComponent {
 
   compras:Compra[]
-  titulo:string = "Mis compras";
+  titulo:string = "Mis listados";
   detalles:DetalleCompra[];
   total:number;
 

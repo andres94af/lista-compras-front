@@ -1,9 +1,32 @@
-<div class="container mt-2">
-  <h3>{{titulo}}</h3>
-  <div class="row mb-3">
-    <div class="col-auto me-3 mt-3" *ngFor="let prod of productos">
-      <button class="btn btn-success">{{prod.nombre}} +</button>
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 mt-3">
+      <h3>{{titulo}}</h3>
+      <div class="row mb-3">
+        <div class="col-auto me-3 mt-3" *ngFor="let prod of productos">
+          <button class="btn btn-success" (click)="verDetallesDelProducto(prod)">{{prod.nombre}} +</button>
+        </div>
+      </div>
+      <a *ngIf="btnVisible" routerLink="/productos" class="btn btn-secondary btn-sm">Eliminar filtros</a>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card mt-4 bg-card" *ngIf="producto">
+        <img src="{{producto.imgUrl}}" class="card-img-top" alt="img producto">
+        <div class="card-body">
+          <h5 class="card-title">{{producto.nombre}}</h5>
+          <p class="card-text">{{producto.informacion}}</p>
+          <h6 class="card-text">Precio: {{producto.precioUnitario}} €</h6>
+          <form class="row g-3" (submit)="agregarALista(producto)">
+            <div class="col-auto">
+              <input type="number" class="form-control bg-card" [(ngModel)]="cantidadProducto" name="cantidadProducto" placeholder="Cantidad" required>
+            </div>
+            <div class="col-auto">
+              <button type="submit" class="btn btn-warning mb-3">Agregar</button>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
   </div>
-  <a *ngIf="btnVisible" routerLink="/productos" class="btn btn-secondary btn-sm">Eliminar filtros</a>
 </div>
