@@ -1,12 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { REST_API_URL } from '../models/models';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ComprasService {
 
-  apiUrl: string = 'http://localhost:8080/compra';
+  apiUrl: string = REST_API_URL + '/compra';
 
   constructor(private http: HttpClient) { }
 

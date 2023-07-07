@@ -38,3 +38,5 @@ export class DetalleCompra {
   total: number;
   // compra: Compra;
 }
+
+export const REST_API_URL:string = "http://localhost:8080";

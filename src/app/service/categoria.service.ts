@@ -1,12 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Categoria } from '../models/models';
+import { Categoria, REST_API_URL } from '../models/models';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CategoriaService {
-  apiUrl: string = 'http://localhost:8080/categoria';
+
+  apiUrl: string = REST_API_URL + '/categoria';
 
   constructor(private http: HttpClient) {}
 

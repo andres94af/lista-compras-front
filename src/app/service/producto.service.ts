@@ -1,12 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Producto } from '../models/models';
+import { Producto, REST_API_URL } from '../models/models';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductoService {
-  apiUrl: string = 'http://localhost:8080/producto';
+
+  apiUrl: string = REST_API_URL + '/producto';
 
   constructor(private http: HttpClient) {}
 
