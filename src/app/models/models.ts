@@ -23,9 +23,8 @@ export class Usuario {
 
 export class Compra {
   id: number;
-  usuario: Usuario;
   fecha: Date;
-  detalles: DetalleCompra[];
+  usuario: Usuario;
   total: number;
   completada: boolean;
 }
@@ -36,7 +35,6 @@ export class DetalleCompra {
   cantidad: number;
   precio: number;
   total: number;
-  // compra: Compra;
 }
 
 export const REST_API_URL:string = "http://localhost:8080";

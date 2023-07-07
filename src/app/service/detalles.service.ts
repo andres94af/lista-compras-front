@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { DetalleCompra, Producto, REST_API_URL } from '../models/models';
+import { DetalleCompra, REST_API_URL } from '../models/models';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -21,5 +21,9 @@ export class DetallesService {
 
   limpiarListaActual(){
     return this.http.get(this.apiUrl + '/eliminar');
+  }
+
+  obtenerDetalleCompra(id:number){
+    return this.http.get(this.apiUrl + '/'+id);
   }
 }

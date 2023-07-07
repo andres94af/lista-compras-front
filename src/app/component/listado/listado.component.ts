@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { DetalleCompra } from 'src/app/models/models';
+import { Compra, DetalleCompra } from 'src/app/models/models';
+import { ComprasService } from 'src/app/service/compras.service';
 import { DetallesService } from 'src/app/service/detalles.service';
+import { UsuarioService } from 'src/app/service/usuario.service';
 
 @Component({
   selector: 'app-listado',
@@ -17,7 +19,9 @@ export class ListadoComponent {
 
   totalLista:number = 0;
 
-  constructor(private detalleService: DetallesService) {
+  compraGenerada:Object;
+
+  constructor(private detalleService: DetallesService, private compraService:ComprasService, private usuarioService:UsuarioService) {
     this.detalleService.obtenerListadoActual().subscribe((detallesObt) => {
       this.listadoDeDetalles = Object.values(detallesObt);
       this.totalLista = this.listadoDeDetalles.reduce((total, detalle) => total + detalle.total, 0);
@@ -32,5 +36,19 @@ export class ListadoComponent {
     if (estaSeguro) {
       this.detalleService.limpiarListaActual().subscribe(()=> window.location.reload());
     }
+  }
+
+  generarListado(){
+    let idUsuario = this.usuarioService.getIdUsuario();
+
+    let nuevaCompra:Compra = new Compra();
+    nuevaCompra.total = this.totalLista;
+    nuevaCompra.completada = false;
+    nuevaCompra.fecha = new Date();
+
+    this.compraService.guardarCompra(nuevaCompra, idUsuario).subscribe(compraObt => {
+      console.log(compraObt);
+      this.compraGenerada = Object.values(compraObt);
+    });
   }
 }

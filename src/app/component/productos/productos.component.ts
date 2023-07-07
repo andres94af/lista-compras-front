@@ -11,7 +11,6 @@ import { ProductoService } from 'src/app/service/producto.service';
   styleUrls: [],
 })
 export class ProductosComponent implements OnInit {
-
   titulo: string = 'Productos';
 
   listadoDeProductos: Producto[];
@@ -32,10 +31,10 @@ export class ProductosComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private router:Router,
+    private router: Router,
     private productoService: ProductoService,
     private categoriaService: CategoriaService,
-    private detalleService:DetallesService
+    private detalleService: DetallesService
   ) {
     this.categoriaService.obtenerCategorias().subscribe((categoriasObt) => {
       this.categoriasSelect = Object.values(categoriasObt);
@@ -93,9 +92,11 @@ export class ProductosComponent implements OnInit {
       producto.imgUrl == '' ||
       catId == '' ||
       producto.precioUnitario == 0
-    ) return;
+    )
+      return;
 
-    this.productoService.generarNuevoProducto(catId, producto)
+    this.productoService
+      .generarNuevoProducto(catId, producto)
       .subscribe((): void => this.verFormularioNuevoProducto());
   }
 
@@ -104,16 +105,16 @@ export class ProductosComponent implements OnInit {
     this.detalleService.agregarAListado(this.nuevoDetalle()).subscribe(() => {
       this.cantidadProducto = 0;
       this.router.navigate(['listado']);
-      alert("Producto agregado!");
     });
   }
 
-  nuevoDetalle(){
+  nuevoDetalle() {
     let detalle: DetalleCompra = new DetalleCompra();
     detalle.nombre = this.productoSeleccionado.nombre;
     detalle.precio = this.productoSeleccionado.precioUnitario;
     detalle.cantidad = this.cantidadProducto;
-    detalle.total = this.productoSeleccionado.precioUnitario * this.cantidadProducto;
+    detalle.total =
+      this.productoSeleccionado.precioUnitario * this.cantidadProducto;
     detalle.total = Number(detalle.total.toFixed(2));
     return detalle;
   }
