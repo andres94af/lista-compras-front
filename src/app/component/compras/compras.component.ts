@@ -16,9 +16,9 @@ export class ComprasComponent {
   total:number;
 
   constructor(private compraService:ComprasService){
-    //Valor quemado con 1 !!!!!!<-----------------------------------
+    //Valor quemado con 1, 
+    //Deberia obtener el Id del usuario del localStorage! <-------------------------
     compraService.obtenerCompras(1).subscribe(comprasObt => {
-      console.log(comprasObt)
       this.compras = Object.values(comprasObt);
     })
   }

@@ -4,14 +4,16 @@ import { ProductosComponent } from './component/productos/productos.component';
 import { ComprasComponent } from './component/compras/compras.component';
 import { CategoriasComponent } from './component/categorias/categorias.component';
 import { InicioComponent } from './component/inicio/inicio.component';
+import { ListadoComponent } from './component/listado/listado.component';
 
 const routes: Routes = [
-  {path: "", component: InicioComponent},
+  {path: "", component: InicioComponent},//Muestra pagna inicial
+  {path: "categorias", component: CategoriasComponent},//Muestra listado de categorias
+  {path: "compras", component: ComprasComponent},//Mustra las compras del usuario actual
+  {path: "listado", component: ListadoComponent},//Muestra el listado actual
   {path: "productos", component: ProductosComponent},//Muestra todos los productos
   {path: "productos/:id", component: ProductosComponent},//Muestra productos por categoria
   {path: "productos/filtro/:valorBusqueda", component: ProductosComponent},//Muestra productos filtrados por nombre
-  {path: "compras/:idUsuario", component: ComprasComponent},
-  {path: "categorias", component: CategoriasComponent}
 ];
 
 @NgModule({

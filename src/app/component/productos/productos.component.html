@@ -2,17 +2,20 @@
   <div class="row">
     <div class="col-md-8 mt-3">
       <h3>{{titulo}}</h3>
+      <!-- LISTADO DE PRODUCTOS -->
       <div class="row mb-3">
-        <div class="col-auto me-3 mt-3" *ngFor="let prod of productos">
+        <div class="col-auto me-3 mt-3" *ngFor="let prod of listadoDeProductos">
           <button class="btn btn-success" (click)="verDetallesDelProducto(prod)">{{prod.nombre}} +</button>
         </div>
       </div>
+      <!-- BOTON PARA ABRIR EL FORMULARIO DE NUEVO PRODUCTO -->
       <div class="row">
         <div class="col-auto me-3 mt-4">
           <button class="btn btn-warning" (click)="verFormularioNuevoProducto()"><strong>Nuevo producto
               +</strong></button>
         </div>
       </div>
+      <!-- BOTON PARA ELIMINAR FILTROS -->
       <div class="row">
         <div class="col-auto me-3 mt-4" *ngIf="btnVisible">
           <a routerLink="/productos" class="btn btn-secondary">Eliminar filtros</a>
@@ -20,25 +23,27 @@
       </div>
     </div>
 
+    <!-- INFORMACION DEL PRODUCTO SELECCIONADO Y FORMULARIO PARA AGREGAR EL PRODUCTO A LA LISTA -->
     <div class="col-md-4 -mt-3">
-      <div class="card mt-4 bg-card" *ngIf="producto; else formNuevoProducto">
-        <img src="{{producto.imgUrl}}" class="card-img-top" alt="img producto">
+      <div class="card mt-4 bg-card" *ngIf="productoSeleccionado; else formNuevoProducto">
+        <img src="{{productoSeleccionado.imgUrl}}" class="card-img-top" alt="img producto">
         <div class="card-body">
-          <h5 class="card-title">{{producto.nombre}}</h5>
-          <p class="card-text">{{producto.informacion}}</p>
-          <h6 class="card-text">Precio: {{producto.precioUnitario}} €</h6>
-          <form class="row g-3" (submit)="agregarAListaDeCompras(producto)">
-            <div class="col-auto">
-              <input type="number" class="form-control bg-card" [(ngModel)]="cantidadProducto" name="cantidadProducto"
+          <h5 class="card-title">{{productoSeleccionado.nombre}}</h5>
+          <p class="card-text">{{productoSeleccionado.informacion}}</p>
+          <h6 class="card-text">Precio: {{productoSeleccionado.precioUnitario}} €</h6>
+          <form class="row g-3" (submit)="agregarAListaActual()">
+            <div class="col">
+              <input type="number" step=".5" class="form-control bg-card" [(ngModel)]="cantidadProducto" name="cantidadProducto"
                 placeholder="Cantidad" required>
             </div>
-            <div class="col-auto">
-              <button type="submit" class="btn btn-warning mb-3">Agregar</button>
+            <div class="col">
+              <button type="submit" class="btn btn-warning mb-3">Agregar a listado</button>
             </div>
           </form>
         </div>
       </div>
 
+      <!-- FORMULARIO PARA CREAR NUEVO PRODUCTO Y GUARDARLO EN LA BBDD -->
       <ng-template #formNuevoProducto>
         <div class="card mt-4 bg-card">
           <h4 class="mt-2 ms-2">Nuevo producto</h4>
@@ -50,17 +55,21 @@
                 [(ngModel)]="datosFormulario.informacion" required>
               <input type="url" class="form-control bg-card" placeholder="http://www.img.jpg" name="imgUrl"
                 [(ngModel)]="datosFormulario.imgUrl" required>
-              <select class="form-select bg-card" name="imgUrl" [(ngModel)]="datosFormulario.idCategoria">
-                <option selected>-- Seleccione una categoría --</option>
-                <option *ngFor="let categoria of categorias" value="{{categoria.id}}">{{categoria.nombre}}</option>
+
+              <!-- <input class="form-control" type="file" id="formFileDisabled"> -->
+
+              <select class="form-select bg-card" name="idCategoria" [(ngModel)]="datosFormulario.idCategoria">
+                <option value="" disabled selected>-- Seleccione categoría --</option>
+                <option *ngFor="let categoria of categoriasSelect; let i = index" value="{{categoria.id}}">{{i+1}} - {{categoria.nombre}}</option>
               </select>
-              <input type="number" step=".05" class="form-control bg-card" placeholder="Precio unitario"
+              <input type="number" step=".05" class="form-control bg-card" placeholder="Precio unitario €"
                 name="precioUnitario" [(ngModel)]="datosFormulario.precioUnitario" required>
               <button type="submit" class="btn btn-warning mb-3">Agregar</button>
             </form>
           </div>
         </div>
       </ng-template>
+
     </div>
   </div>
 </div>

@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { InicioComponent } from './component/inicio/inicio.component';
 import { FooterComponent } from './component/footer/footer.component';
+import { ListadoComponent } from './component/listado/listado.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { FooterComponent } from './component/footer/footer.component';
     ComprasComponent,
     CategoriasComponent,
     InicioComponent,
-    FooterComponent
+    FooterComponent,
+    ListadoComponent
   ],
   imports: [
     BrowserModule,

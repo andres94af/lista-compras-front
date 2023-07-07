@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { Categoria, Producto } from 'src/app/models/models';
+import { Categoria, DetalleCompra, Producto } from 'src/app/models/models';
 import { CategoriaService } from 'src/app/service/categoria.service';
+import { DetallesService } from 'src/app/service/detalles.service';
 import { ProductoService } from 'src/app/service/producto.service';
 
 @Component({
@@ -10,44 +11,48 @@ import { ProductoService } from 'src/app/service/producto.service';
   styleUrls: [],
 })
 export class ProductosComponent implements OnInit {
+
   titulo: string = 'Productos';
-  productos: Producto[];
-  producto: Producto;
-  id: any;
+
+  listadoDeProductos: Producto[];
+  listadoDeDetalles: DetalleCompra[] = new Array();
+  productoSeleccionado: Producto;
+  paramIdProducto: any;
   valorBusqueda: any;
   btnVisible: boolean = false;
   cantidadProducto: number;
-  categorias: Categoria[];
+  categoriasSelect: Categoria[];
   datosFormulario = {
     nombre: '',
     informacion: '',
     imgUrl: '',
-    precioUnitario: '',
     idCategoria: '',
+    precioUnitario: '',
   };
 
   constructor(
     private route: ActivatedRoute,
     private productoService: ProductoService,
-    private categoriaService: CategoriaService
+    private categoriaService: CategoriaService,
+    private detalleService:DetallesService
   ) {
     this.categoriaService.obtenerCategorias().subscribe((categoriasObt) => {
-      this.categorias = Object.values(categoriasObt);
+      this.categoriasSelect = Object.values(categoriasObt);
     });
 
     this.route.paramMap.subscribe((params) => {
-      this.id = params.get('id');
+      this.paramIdProducto = params.get('id');
       this.valorBusqueda = params.get('valorBusqueda');
     });
   }
 
   ngOnInit(): void {
-    if (this.id != null) {
+    if (this.paramIdProducto != null) {
       this.productoService
-        .obtenerProductosPorCategoria(this.id)
+        .obtenerProductosPorCategoria(this.paramIdProducto)
         .subscribe((productosObt) => {
-          this.productos = Object.values(productosObt);
-          if (this.productos.length != 0) {
+          this.listadoDeProductos = Object.values(productosObt);
+          if (this.listadoDeProductos.length != 0) {
             this.btnVisible = true;
           }
         });
@@ -55,18 +60,18 @@ export class ProductosComponent implements OnInit {
       this.productoService
         .obtenerProductosFiltrados(this.valorBusqueda)
         .subscribe((productosObt) => {
-          this.productos = Object.values(productosObt);
+          this.listadoDeProductos = Object.values(productosObt);
           this.btnVisible = true;
         });
     } else {
       this.productoService.obtenerProductos().subscribe((productosObt) => {
-        this.productos = Object.values(productosObt);
+        this.listadoDeProductos = Object.values(productosObt);
       });
     }
   }
 
   verDetallesDelProducto(producto: Producto) {
-    this.producto = producto;
+    this.productoSeleccionado = producto;
   }
 
   verFormularioNuevoProducto() {
@@ -87,24 +92,23 @@ export class ProductosComponent implements OnInit {
       producto.imgUrl == '' ||
       catId == '' ||
       producto.precioUnitario == 0
-    ) {
-      return;
-    }
-    this.productoService
-      .generarNuevoProducto(catId, producto)
-      .subscribe((productoObt) => {
-        console.log(productoObt);
-        this.verFormularioNuevoProducto();
-      });
+    ) return;
+
+    this.productoService.generarNuevoProducto(catId, producto)
+      .subscribe((): void => this.verFormularioNuevoProducto());
   }
 
-  //Por Hacer
-  agregarAListaDeCompras(producto: Producto) {
-    console.log(
-      'Agregar: ' +
-        producto.nombre +
-        ' la cantidad de: ' +
-        this.cantidadProducto
-    );
+  agregarAListaActual() {
+    if (this.cantidadProducto == 0 || this.cantidadProducto == null) return;
+    this.detalleService.agregarAListado(this.nuevoDetalle()).subscribe(() => this.cantidadProducto = 0);
+  }
+
+  nuevoDetalle(){
+    let detalle: DetalleCompra = new DetalleCompra();
+    detalle.nombre = this.productoSeleccionado.nombre;
+    detalle.precio = this.productoSeleccionado.precioUnitario;
+    detalle.cantidad = this.cantidadProducto;
+    detalle.total = this.productoSeleccionado.precioUnitario * this.cantidadProducto;
+    return detalle;
   }
 }
