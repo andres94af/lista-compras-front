@@ -1,1 +1,32 @@
-<p>listado works!</p>
+<div class="container mt-3">
+  <h3>{{titulo}}</h3>
+<div class="row">
+  <div class="card p-1 bg-card">
+    <table class="table table-borderless text-center table-warning">
+      <thead>
+        <tr>
+          <th scope="col">Item</th>
+          <th scope="col">Producto</th>
+          <th scope="col">Cant.</th>
+          <th scope="col">Precio</th>
+          <th scope="col">Subtotal</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let detalle of listadoDeDetalles; let i = index">
+          <td>{{i + 1}}</td>
+          <td>{{detalle.nombre}}</td>
+          <td>{{detalle.cantidad}}</td>
+          <td>{{detalle.precio}} €</td>
+          <td>{{detalle.total}} €</td>
+        </tr>
+      </tbody>
+    </table>
+    <h6 class="text-end me-3">Total {{totalLista}} €</h6>
+  </div>
+</div>
+<div class="row mt-3">
+  <button class="btn btn-success col-auto me-3">Guardar lista</button>
+  <button class="btn btn-danger col-auto me-3">Limpiar lista</button>
+</div>
+</div>

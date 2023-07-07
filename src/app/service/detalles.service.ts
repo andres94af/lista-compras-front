@@ -10,6 +10,10 @@ export class DetallesService {
 
   constructor(private http:HttpClient) {}
 
+  obtenerListadoActual(){
+    return this.http.get(this.apiUrl);
+  }
+
   agregarAListado(detalle:DetalleCompra) {
     return this.http.post(this.apiUrl + '/agregar', detalle);
   }
