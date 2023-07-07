@@ -17,4 +17,8 @@ export class DetallesService {
   agregarAListado(detalle:DetalleCompra) {
     return this.http.post(this.apiUrl + '/agregar', detalle);
   }
+
+  limpiarListaActual(){
+    return this.http.get(this.apiUrl + '/eliminar');
+  }
 }

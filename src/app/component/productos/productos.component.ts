@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Categoria, DetalleCompra, Producto } from 'src/app/models/models';
 import { CategoriaService } from 'src/app/service/categoria.service';
 import { DetallesService } from 'src/app/service/detalles.service';
@@ -32,6 +32,7 @@ export class ProductosComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router:Router,
     private productoService: ProductoService,
     private categoriaService: CategoriaService,
     private detalleService:DetallesService
@@ -100,7 +101,11 @@ export class ProductosComponent implements OnInit {
 
   agregarAListaActual() {
     if (this.cantidadProducto == 0 || this.cantidadProducto == null) return;
-    this.detalleService.agregarAListado(this.nuevoDetalle()).subscribe(() => this.cantidadProducto = 0);
+    this.detalleService.agregarAListado(this.nuevoDetalle()).subscribe(() => {
+      this.cantidadProducto = 0;
+      this.router.navigate(['listado']);
+      alert("Producto agregado!");
+    });
   }
 
   nuevoDetalle(){
@@ -109,6 +114,7 @@ export class ProductosComponent implements OnInit {
     detalle.precio = this.productoSeleccionado.precioUnitario;
     detalle.cantidad = this.cantidadProducto;
     detalle.total = this.productoSeleccionado.precioUnitario * this.cantidadProducto;
+    detalle.total = Number(detalle.total.toFixed(2));
     return detalle;
   }
 }
