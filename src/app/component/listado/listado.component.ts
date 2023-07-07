@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { Compra, DetalleCompra } from 'src/app/models/models';
 import { ComprasService } from 'src/app/service/compras.service';
 import { DetallesService } from 'src/app/service/detalles.service';
@@ -21,7 +22,7 @@ export class ListadoComponent {
 
   compraGenerada:Object;
 
-  constructor(private detalleService: DetallesService, private compraService:ComprasService, private usuarioService:UsuarioService) {
+  constructor(private detalleService: DetallesService, private compraService:ComprasService, private usuarioService:UsuarioService, private router:Router) {
     this.detalleService.obtenerListadoActual().subscribe((detallesObt) => {
       this.listadoDeDetalles = Object.values(detallesObt);
       this.totalLista = this.listadoDeDetalles.reduce((total, detalle) => total + detalle.total, 0);
@@ -46,9 +47,6 @@ export class ListadoComponent {
     nuevaCompra.completada = false;
     nuevaCompra.fecha = new Date();
 
-    this.compraService.guardarCompra(nuevaCompra, idUsuario).subscribe(compraObt => {
-      console.log(compraObt);
-      this.compraGenerada = Object.values(compraObt);
-    });
+    this.compraService.guardarCompra(nuevaCompra, idUsuario).subscribe(()=> this.router.navigate(['/compras']));
   }
 }

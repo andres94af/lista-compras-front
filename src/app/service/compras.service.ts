@@ -18,4 +18,8 @@ export class ComprasService {
   guardarCompra(compra:Compra, idUsuario:number){
     return this.http.post(this.apiUrl + '/' + idUsuario, compra);
   }
+
+  eliminarCompra(compraId:number){
+    return this.http.delete(this.apiUrl + '/' + compraId);
+  }
 }

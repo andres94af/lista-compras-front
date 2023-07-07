@@ -11,8 +11,8 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let detalle of detalles">
-        <td>{{detalle.id}}</td>
+      <tr *ngFor="let detalle of detalles, let i = index">
+        <td>{{i + 1}}</td>
         <td>{{detalle.nombre}}</td>
         <td>{{detalle.cantidad}}</td>
         <td>{{detalle.precio}} €</td>

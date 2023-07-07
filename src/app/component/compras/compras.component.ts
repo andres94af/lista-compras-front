@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { Compra, DetalleCompra } from 'src/app/models/models';
 import { ComprasService } from 'src/app/service/compras.service';
 import { DetallesService } from 'src/app/service/detalles.service';
@@ -18,7 +19,7 @@ export class ComprasComponent {
   total:number;
   idUsuario:number;
 
-  constructor(private compraService:ComprasService, private detalleService:DetallesService, private usuarioService:UsuarioService){
+  constructor(private compraService:ComprasService, private detalleService:DetallesService, private usuarioService:UsuarioService, private router:Router){
     //Valor quemado con 1, 
     //Deberia obtener el Id del usuario del localStorage! <-------------------------
     this.idUsuario = this.usuarioService.getIdUsuario();
@@ -33,6 +34,13 @@ export class ComprasComponent {
       this.detalles = Object.values(detallesObt);
       this.total = total;
     });
+  }
+
+  eliminarCompra(compraId:number){
+    let estaSeguro:boolean = confirm("¿Está seguro de eliminar esta compra?")
+    if (estaSeguro) {
+      this.compraService.eliminarCompra(compraId).subscribe(()=> window.location.reload());
+    }
   }
 
 }
