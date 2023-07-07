@@ -1,14 +1,14 @@
-<div class="container mt-2">
+<div class="container my-3">
   <div class="row">
 
-    <div class="col-md-7">
+    <div class="col-md-7 mb-3">
       <h3>{{titulo}}</h3>
       <div class="card p-1 bg-card">
         <table class="table text-center table-hover table-warning">
           <thead>
             <tr>
               <th scope="col">Fecha</th>
-              <th scope="col">Completada</th>
+              <th scope="col">Compl</th>
               <th scope="col">Total</th>
               <th scope="col">Detalle</th>
             </tr>
@@ -23,7 +23,7 @@
               <td>{{compra.total}} €</td>
               <td>
                 <div class="btn-group" role="group">
-                 <button class="btn btn-warning btn-sm" (click)="cargarDetalles(compra.id, compra.total)">Ver detalle</button>
+                 <button class="btn btn-warning btn-sm" (click)="cargarDetalles(compra.id, compra.total)">Detalle</button>
                  <button class="btn btn-danger btn-sm" (click)="eliminarCompra(compra.id)">Eliminar</button>
                 </div>
               </td>
@@ -33,7 +33,7 @@
       </div>
     </div>
 
-    <div class="col-md-5">
+    <div class="col p-0">
       <app-detalles *ngIf="detalles" [detalles]="detalles" [total]="total"></app-detalles>
     </div>
 

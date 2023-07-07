@@ -1,21 +1,17 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UsuarioService {
 
-  id:number;
+  constructor() {}
 
-  constructor() {
-    this.id = 1;
-   }
-
-  getIdUsuario(){
-    return this.id;
+  getIdUsuario() {
+    return Number(window.localStorage.getItem('id_usuario'));
   }
 
-  setIdUsuario(id:number){
-    this.id = id;
+  setIdUsuario(id: number) {
+    window.localStorage.setItem('id_usuario', id + '');
   }
 }

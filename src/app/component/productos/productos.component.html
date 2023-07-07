@@ -4,7 +4,7 @@
       <h3>{{titulo}}</h3>
       <!-- LISTADO DE PRODUCTOS -->
       <div class="row mb-3">
-        <div class="col-auto me-3 mt-3" *ngFor="let prod of listadoDeProductos">
+        <div class="col-auto mt-3" *ngFor="let prod of listadoDeProductos">
           <button class="btn btn-success" (click)="verDetallesDelProducto(prod)">{{prod.nombre}} +</button>
         </div>
       </div>
@@ -60,7 +60,7 @@
 
               <select class="form-select bg-card" name="idCategoria" [(ngModel)]="datosFormulario.idCategoria">
                 <option value="" disabled selected>-- Seleccione categoría --</option>
-                <option *ngFor="let categoria of categoriasSelect; let i = index" value="{{categoria.id}}">{{i+1}} - {{categoria.nombre}}</option>
+                <option *ngFor="let categoria of categoriasSelect" value="{{categoria.id}}">{{categoria.nombre}}</option>
               </select>
               <input type="number" step=".05" class="form-control bg-card" placeholder="Precio unitario €"
                 name="precioUnitario" [(ngModel)]="datosFormulario.precioUnitario" required>
