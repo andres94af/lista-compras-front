@@ -7,17 +7,17 @@ import { InicioComponent } from './component/inicio/inicio.component';
 import { ListadoComponent } from './component/listado/listado.component';
 
 const routes: Routes = [
-  {path: "", component: InicioComponent},//Muestra pagna inicial
-  {path: "categorias", component: CategoriasComponent},//Muestra listado de categorias
-  {path: "compras", component: ComprasComponent},//Mustra las compras del usuario actual
-  {path: "listado", component: ListadoComponent},//Muestra el listado actual
-  {path: "productos", component: ProductosComponent},//Muestra todos los productos
-  {path: "productos/:id", component: ProductosComponent},//Muestra productos por categoria
-  {path: "productos/filtro/:valorBusqueda", component: ProductosComponent},//Muestra productos filtrados por nombre
+  { path: '', component: InicioComponent }, //Muestra pagna inicial
+  { path: 'categorias', component: CategoriasComponent }, //Muestra listado de categorias
+  { path: 'compras', component: ComprasComponent }, //Mustra las compras del usuario actual
+  { path: 'listado', component: ListadoComponent }, //Muestra el listado actual
+  { path: 'productos', component: ProductosComponent }, //Muestra todos los productos
+  { path: 'productos/:id', component: ProductosComponent }, //Muestra productos por categoria
+  { path: 'productos/filtro/:valorBusqueda', component: ProductosComponent }, //Muestra productos filtrados por nombre
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

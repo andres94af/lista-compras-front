@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Categoria, DetalleCompra, Producto } from 'src/app/models/models';
 import { CategoriaService } from 'src/app/service/categoria.service';
+import { CloudinaryService } from 'src/app/service/cloudinary.service';
 import { DetallesService } from 'src/app/service/detalles.service';
 import { ProductoService } from 'src/app/service/producto.service';
 
@@ -24,16 +25,17 @@ export class ProductosComponent implements OnInit {
   datosFormulario = {
     nombre: '',
     informacion: '',
-    imgUrl: '',
     idCategoria: '',
     precioUnitario: '',
   };
+  img: File;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private productoService: ProductoService,
     private categoriaService: CategoriaService,
+    private cloudinaryService:CloudinaryService,
     private detalleService: DetallesService
   ) {
     this.categoriaService.obtenerCategorias().subscribe((categoriasObt) => {
@@ -78,26 +80,36 @@ export class ProductosComponent implements OnInit {
     window.location.reload();
   }
 
+  cambioImagen(event: any) {
+    this.img = event.target.files[0];
+  }
+
   guardarNuevoProducto() {
     let producto: Producto = new Producto();
     producto.nombre = this.datosFormulario.nombre;
     producto.informacion = this.datosFormulario.informacion;
-    producto.imgUrl = this.datosFormulario.imgUrl;
     producto.precioUnitario = Number(this.datosFormulario.precioUnitario);
     let catId: string = this.datosFormulario.idCategoria;
-
+  
     if (
       producto.nombre == '' ||
       producto.informacion == '' ||
-      producto.imgUrl == '' ||
       catId == '' ||
-      producto.precioUnitario == 0
-    )
-      return;
+      producto.precioUnitario == 0 ||
+      !this.img
+    )  return;
 
-    this.productoService
-      .generarNuevoProducto(catId, producto)
-      .subscribe((): void => this.verFormularioNuevoProducto());
+    this.cloudinaryService.subirImagen(this.img).subscribe(
+      imageUrl => {
+        producto.imgUrl = imageUrl.secure_url;
+        this.productoService
+        .generarNuevoProducto(catId, producto)
+        .subscribe((): void => this.verFormularioNuevoProducto());
+      },
+      error => {
+        console.error('Failed to upload image:', error);
+      }
+    );
   }
 
   agregarAListaActual() {
@@ -113,8 +125,7 @@ export class ProductosComponent implements OnInit {
     detalle.nombre = this.productoSeleccionado.nombre;
     detalle.precio = this.productoSeleccionado.precioUnitario;
     detalle.cantidad = this.cantidadProducto;
-    detalle.total =
-      this.productoSeleccionado.precioUnitario * this.cantidadProducto;
+    detalle.total = this.productoSeleccionado.precioUnitario * this.cantidadProducto;
     detalle.total = Number(detalle.total.toFixed(2));
     return detalle;
   }

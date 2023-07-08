@@ -53,11 +53,7 @@
                 [(ngModel)]="datosFormulario.nombre" required>
               <input type="text" class="form-control bg-card" placeholder="Información" name="informacion"
                 [(ngModel)]="datosFormulario.informacion" required>
-              <input type="url" class="form-control bg-card" placeholder="http://www.img.jpg" name="imgUrl"
-                [(ngModel)]="datosFormulario.imgUrl" required>
-
-              <!-- <input class="form-control" type="file" id="formFileDisabled"> -->
-
+              <input type="file" class="form-control" (change)="cambioImagen($event)">
               <select class="form-select bg-card" name="idCategoria" [(ngModel)]="datosFormulario.idCategoria">
                 <option value="" disabled selected>-- Seleccione categoría --</option>
                 <option *ngFor="let categoria of categoriasSelect" value="{{categoria.id}}">{{categoria.nombre}}</option>
