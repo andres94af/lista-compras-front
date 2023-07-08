@@ -11,9 +11,10 @@ const routes: Routes = [
   { path: 'categorias', component: CategoriasComponent }, //Muestra listado de categorias
   { path: 'compras', component: ComprasComponent }, //Mustra las compras del usuario actual
   { path: 'listado', component: ListadoComponent }, //Muestra el listado actual
+  { path: 'login', component: ListadoComponent }, //Muestra el listado actual
   { path: 'productos', component: ProductosComponent }, //Muestra todos los productos
-  { path: 'productos/:id', component: ProductosComponent }, //Muestra productos por categoria
-  { path: 'productos/filtro/:valorBusqueda', component: ProductosComponent }, //Muestra productos filtrados por nombre
+  { path: 'productos/:idCategoria', component: ProductosComponent }, //Muestra productos por categoria
+  { path: 'productos/busqueda/:valorBusqueda', component: ProductosComponent }, //Muestra productos filtrados por nombre
 ];
 
 @NgModule({

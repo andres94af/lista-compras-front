@@ -16,7 +16,7 @@ export class AppComponent {
 
   buscarProducto() {
     if(this.valorBusqueda != ""){
-      this.router.navigate(['productos/filtro/' + this.valorBusqueda]);
+      this.router.navigate(['productos/busqueda/' + this.valorBusqueda]);
       this.valorBusqueda = "";
     }
   }

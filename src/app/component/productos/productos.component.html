@@ -3,13 +3,18 @@
     <div class="col-md-8 mt-3">
       <h3>{{titulo}}</h3>
       <!-- LISTADO DE PRODUCTOS -->
-      <div class="row mb-3">
+      <div class="row mb-3" *ngIf="listadoDeProductos.length > 0; else sinProductos">
         <div class="col-auto mt-3" *ngFor="let prod of listadoDeProductos">
           <button class="btn btn-success" (click)="verDetallesDelProducto(prod)">{{prod.nombre}} +</button>
         </div>
       </div>
+      <ng-template #sinProductos>
+        <div>
+          <p>No hay productos :/</p>
+        </div>
+      </ng-template>
       <!-- BOTON PARA ABRIR EL FORMULARIO DE NUEVO PRODUCTO -->
-      <div class="row">
+      <div class="row" *ngIf="btnNuevoProducto">
         <div class="col-auto me-3 mt-4">
           <button class="btn btn-warning" (click)="verFormularioNuevoProducto()"><strong>Nuevo producto
               +</strong></button>
@@ -17,7 +22,7 @@
       </div>
       <!-- BOTON PARA ELIMINAR FILTROS -->
       <div class="row">
-        <div class="col-auto me-3 mt-4" *ngIf="btnVisible">
+        <div class="col-auto me-3 mt-4" *ngIf="btnLimpiarFiltro">
           <a routerLink="/productos" class="btn btn-secondary">Eliminar filtros</a>
         </div>
       </div>
