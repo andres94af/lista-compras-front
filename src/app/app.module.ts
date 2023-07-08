@@ -12,6 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { InicioComponent } from './component/inicio/inicio.component';
 import { FooterComponent } from './component/footer/footer.component';
 import { ListadoComponent } from './component/listado/listado.component';
+import { LoginComponent } from './component/login/login.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ListadoComponent } from './component/listado/listado.component';
     CategoriasComponent,
     InicioComponent,
     FooterComponent,
-    ListadoComponent
+    ListadoComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

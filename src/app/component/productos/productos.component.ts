@@ -102,12 +102,13 @@ export class ProductosComponent implements OnInit {
     this.cloudinaryService.subirImagen(this.img).subscribe(
       imageUrl => {
         producto.imgUrl = imageUrl.secure_url;
+        producto.imgId = imageUrl.public_id;
         this.productoService
         .generarNuevoProducto(catId, producto)
         .subscribe((): void => this.verFormularioNuevoProducto());
       },
       error => {
-        console.error('Failed to upload image:', error);
+        console.error('Error al subir la imagen', error);
       }
     );
   }

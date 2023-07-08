@@ -9,6 +9,7 @@ export class Producto {
   nombre: string;
   informacion: string;
   imgUrl: string;
+  imgId: string;
   precioUnitario: number;
   categoria: Categoria;
 }
