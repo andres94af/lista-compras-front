@@ -4,14 +4,21 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class UsuarioService {
-
   constructor() {}
 
   getIdUsuario() {
-    return Number(window.localStorage.getItem('id_usuario'));
+    return Number(window.sessionStorage.getItem('id_usuario'));
   }
 
   setIdUsuario(id: number) {
-    window.localStorage.setItem('id_usuario', id + '');
+    window.sessionStorage.setItem('id_usuario', id + '');
+  }
+
+  getNombreDeUsuario() {
+    return window.sessionStorage.getItem('nombre_usuario');
+  }
+
+  setNombreDeUsuario(nombre: string) {
+    window.sessionStorage.setItem('nombre_usuario', nombre);
   }
 }

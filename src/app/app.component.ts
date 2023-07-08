@@ -11,7 +11,6 @@ export class AppComponent {
   valorBusqueda: string = "";
 
   constructor(private router: Router, private usuarioService:UsuarioService) {
-    this.usuarioService.setIdUsuario(1);
   }
 
   buscarProducto() {

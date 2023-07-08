@@ -20,10 +20,7 @@ export class ComprasComponent {
   idUsuario:number;
 
   constructor(private compraService:ComprasService, private detalleService:DetallesService, private usuarioService:UsuarioService, private router:Router){
-    //Valor quemado con 1, 
-    //Deberia obtener el Id del usuario del localStorage! <-------------------------
     this.idUsuario = this.usuarioService.getIdUsuario();
-
     this.compraService.obtenerCompras(this.idUsuario).subscribe(comprasObt => {
       this.compras = Object.values(comprasObt);
     })
