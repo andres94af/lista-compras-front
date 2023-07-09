@@ -1,4 +1,4 @@
-<div class="container mt-3" *ngIf="comenzarLista; else sinDetalles">
+<div class="container mt-3" *ngIf="!listaDetalleVacia(); else sinDetalles">
   <h3>{{titulo}}</h3>
   <div class="row">
     <div class="card p-1 bg-card">

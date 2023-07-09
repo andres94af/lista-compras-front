@@ -14,9 +14,7 @@ export class ListadoComponent {
 
   titulo: string = 'Listado actual';
 
-  comenzarLista:boolean = false;
-
-  listadoDeDetalles: DetalleCompra[];
+  listadoDeDetalles: DetalleCompra[] = [];
 
   totalLista:number = 0;
 
@@ -26,9 +24,6 @@ export class ListadoComponent {
     this.detalleService.obtenerListadoActual().subscribe((detallesObt) => {
       this.listadoDeDetalles = Object.values(detallesObt);
       this.totalLista = this.listadoDeDetalles.reduce((total, detalle) => total + detalle.total, 0);
-      if (this.listadoDeDetalles.length > 0) {
-        this.comenzarLista = true;
-      }
     });
   }
 
@@ -45,5 +40,9 @@ export class ListadoComponent {
       nuevaCompra.completada = false;
       nuevaCompra.fecha = new Date();
       this.compraService.guardarCompra(nuevaCompra).subscribe(()=> this.router.navigate(['/compras']));
+  }
+
+  listaDetalleVacia(){
+    return this.listadoDeDetalles.length === 0;
   }
 }

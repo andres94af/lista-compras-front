@@ -22,14 +22,20 @@ export class LoginService {
 
       const bearerToken = headers.get('Authorization')!;
       const token = bearerToken.replace('Bearer ', '');
+      const username = body.username;
       
       sessionStorage.setItem('token', token);
+      sessionStorage.setItem('username', username);
       return body;
     }))
   }
 
   obtenerToken(){
     return sessionStorage.getItem('token');
+  }
+
+  obtenerUsername(){
+    return sessionStorage.getItem('username');
   }
 
   cerrarSesion(){

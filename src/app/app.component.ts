@@ -10,11 +10,14 @@ import { LoginService } from './service/login.service';
 export class AppComponent {
   valorBusqueda: string = '';
   estaLogueado: boolean = false;
+  username: string = '';
 
   constructor(private router: Router, private loginService: LoginService) {
     const token = this.loginService.obtenerToken();
+    const username = this.loginService.obtenerUsername();
     if (token) {
       this.estaLogueado = true;
+      this.username = '(' + username + ')';
     }
   }
 

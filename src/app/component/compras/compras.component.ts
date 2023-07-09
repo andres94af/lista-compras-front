@@ -1,8 +1,7 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { Compra, DetalleCompra } from 'src/app/models/models';
 import { ComprasService } from 'src/app/service/compras.service';
 import { DetallesService } from 'src/app/service/detalles.service';
-import { LoginService } from 'src/app/service/login.service';
 
 @Component({
   selector: 'app-compras',
@@ -12,14 +11,14 @@ import { LoginService } from 'src/app/service/login.service';
 })
 export class ComprasComponent {
 
-  compras:Compra[]
+  listadoDeCompras:Compra[] = [];
   titulo:string = "Mis listados";
   detalles:DetalleCompra[];
   total:number;
 
-  constructor(private compraService:ComprasService, private detalleService:DetallesService, private loginService:LoginService){
+  constructor(private compraService:ComprasService, private detalleService:DetallesService){
       this.compraService.obtenerCompras().subscribe(comprasObt => {
-        this.compras = Object.values(comprasObt);
+        this.listadoDeCompras = Object.values(comprasObt);
       })
   }
 
@@ -35,6 +34,10 @@ export class ComprasComponent {
     if (estaSeguro) {
       this.compraService.eliminarCompra(compraId).subscribe(()=> window.location.reload());
     }
+  }
+
+  noTieneCompras(){
+    return this.listadoDeCompras.length === 0;
   }
 
 }

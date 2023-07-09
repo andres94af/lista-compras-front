@@ -1,7 +1,7 @@
 <div class="container my-3">
   <div class="row">
 
-    <div class="col-md-7 mb-3">
+    <div class="col-md-7 mb-3" *ngIf="!noTieneCompras(); else sinListados">
       <h3>{{titulo}}</h3>
       <div class="card p-1 bg-card">
         <table class="table text-center table-hover table-warning">
@@ -14,7 +14,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let compra of compras">
+            <tr *ngFor="let compra of listadoDeCompras">
               <td>{{compra.fecha}}</td>
               <td *ngIf="compra.completada; else finalizada">Si</td>
               <ng-template #finalizada>
@@ -32,6 +32,17 @@
         </table>
       </div>
     </div>
+
+    <ng-template #sinListados>
+      <div class="container mt-3 text-center">
+          <h3>Aún no ha generado listados de compras</h3>
+          <img src="../../../assets/listado-vacio.png" alt="Lista vacía" style="width: 40%; margin: 2rem;">
+          <div>
+            <a type="button" class="btn btn-warning me-3 col-auto" href="/productos">Agregar productos</a>
+            <a type="button" class="btn btn-warning col-auto" href="/categorias">Ver categorias</a>
+          </div>
+      </div>
+    </ng-template>
 
     <div class="col p-0">
       <app-detalles *ngIf="detalles" [detalles]="detalles" [total]="total"></app-detalles>

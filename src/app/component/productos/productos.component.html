@@ -28,7 +28,7 @@
       </div>
     </div>
 
-    <!-- INFORMACION DEL PRODUCTO SELECCIONADO Y FORMULARIO PARA AGREGAR EL PRODUCTO A LA LISTA -->
+    <!-- INFORMACION DEL PRODUCTO SELECCIONADO Y FORMULARIO PARA AGREGAR EL PRODUCTO A LA LISTA ACTUAL-->
     <div class="col-md-4 -mt-3">
       <div class="card mt-4 bg-card" *ngIf="productoSeleccionado; else formNuevoProducto">
         <img src="{{productoSeleccionado.imgUrl}}" class="card-img-top" alt="img producto">
@@ -38,8 +38,8 @@
           <h6 class="card-text">Precio: {{productoSeleccionado.precioUnitario}} €</h6>
           <form class="row g-3" (submit)="agregarAListaActual()">
             <div class="col">
-              <input type="number" step=".5" class="form-control bg-card" [(ngModel)]="cantidadProducto" name="cantidadProducto"
-                placeholder="Cantidad" required>
+              <input type="number" step=".5" min="0" class="form-control bg-card" [(ngModel)]="cantidadProducto"
+                name="cantidadProducto" placeholder="Cantidad" required>
             </div>
             <div class="col">
               <button type="submit" class="btn btn-warning mb-3">Agregar a listado</button>
@@ -61,7 +61,8 @@
               <input type="file" class="form-control" (change)="cambioImagen($event)">
               <select class="form-select bg-card" name="idCategoria" [(ngModel)]="datosFormulario.idCategoria">
                 <option value="" disabled selected>-- Seleccione categoría --</option>
-                <option *ngFor="let categoria of categoriasSelect" value="{{categoria.id}}">{{categoria.nombre}}</option>
+                <option *ngFor="let categoria of categoriasSelect" value="{{categoria.id}}">{{categoria.nombre}}
+                </option>
               </select>
               <input type="number" step=".05" class="form-control bg-card" placeholder="Precio unitario €"
                 name="precioUnitario" [(ngModel)]="datosFormulario.precioUnitario" required>
