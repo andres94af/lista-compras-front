@@ -39,3 +39,8 @@ export class DetalleCompra {
 }
 
 export const REST_API_URL:string = "http://localhost:8080";
+
+export interface Credentials {
+  username:string;
+  password:string;
+}

@@ -4,16 +4,20 @@
       <div class="card bg-card">
       <h2 class="text-center my-3">{{titulo}}</h2>
       <div class="card-body">
-        <form (ngSubmit)="iniciarSesion()" class="row">
+
+        <form class="row" #form="ngForm" (ngSubmit)="iniciarSesion(form)">
           <div class="container px-4">
-            <label for="email" class="form-label">Email</label>
-            <input type="email" id="email" name="email" [(ngModel)]="email" class="form-control mb-3" placeholder="Ingrese su email" required>
+
+            <label for="username" class="form-label">Nombre de usuario</label>
+            <input type="username" id="username" name="username" class="form-control mb-3" placeholder="Ingrese su nombre de usuario" [(ngModel)]="creds.username" required>
 
             <label for="password" class="form-label">Contraseña</label>
-            <input type="password" id="password" name="password" [(ngModel)]="password" class="form-control mb-4" placeholder="Ingrese su contraseña" required>
-            <button type="submit" class="btn btn-warning">Iniciar sesión</button>
+            <input type="password" id="password" name="password" class="form-control mb-4" placeholder="Ingrese su contraseña" [(ngModel)]="creds.password" required>
+
+            <button class="btn btn-warning">Iniciar sesión</button>
           </div>
         </form>
+
       </div>
       </div>
     </div>

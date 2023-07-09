@@ -1,25 +1,34 @@
 import { Injectable } from '@angular/core';
 import { UsuarioService } from './usuario.service';
 import { REST_API_URL, Usuario } from '../models/models';
+import { HttpClient, HttpResponse } from '@angular/common/http';
+import { map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
 
-  apiUrl: string = REST_API_URL + '/usuario';
+  apiUrl: string = "http://localhost:8080/login";
 
-  constructor(private usuarioService:UsuarioService) { }
+  constructor(private usuarioService:UsuarioService, private http:HttpClient) { }
 
-  iniciarSesion(email:string, password:string){
-    let usuario:Usuario = new Usuario();
-    usuario.id = 1;
-    usuario.nombre =  "Andres"
-    usuario.apellido = "Fernandez"
-    usuario.username = email;
-    usuario.password = password;
-    this.usuarioService.setIdUsuario(usuario.id);
-    this.usuarioService.setNombreDeUsuario(usuario.nombre);
-    return true;
+  iniciarSesion(creds:any){
+    return this.http.post(this.apiUrl, creds, {
+      observe: 'response'
+    }).pipe(map((response: HttpResponse<any>) => {
+      const body = response.body;
+      const headers = response.headers;
+      
+      const bearerToken = headers.get('Authorization')!;
+      const token = bearerToken.replace('Bearer ', '');
+      sessionStorage.setItem('token', token);
+
+      return body;
+    }))
+  }
+
+  obtenerToken(){
+    return localStorage.getItem('token');
   }
 }
