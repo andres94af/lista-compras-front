@@ -8,11 +8,12 @@ import { DetallesComponent } from './component/detalles/detalles.component';
 import { ComprasComponent } from './component/compras/compras.component';
 import { CategoriasComponent } from './component/categorias/categorias.component';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { InicioComponent } from './component/inicio/inicio.component';
 import { FooterComponent } from './component/footer/footer.component';
 import { ListadoComponent } from './component/listado/listado.component';
 import { LoginComponent } from './component/login/login.component';
+import { AuthInterceptor } from './helpers/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,9 @@ import { LoginComponent } from './component/login/login.component';
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

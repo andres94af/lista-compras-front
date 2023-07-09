@@ -1,9 +1,8 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { Router } from '@angular/router';
 import { Compra, DetalleCompra } from 'src/app/models/models';
 import { ComprasService } from 'src/app/service/compras.service';
 import { DetallesService } from 'src/app/service/detalles.service';
-import { UsuarioService } from 'src/app/service/usuario.service';
+import { LoginService } from 'src/app/service/login.service';
 
 @Component({
   selector: 'app-compras',
@@ -17,13 +16,11 @@ export class ComprasComponent {
   titulo:string = "Mis listados";
   detalles:DetalleCompra[];
   total:number;
-  idUsuario:number;
 
-  constructor(private compraService:ComprasService, private detalleService:DetallesService, private usuarioService:UsuarioService, private router:Router){
-    this.idUsuario = this.usuarioService.getIdUsuario();
-    this.compraService.obtenerCompras(this.idUsuario).subscribe(comprasObt => {
-      this.compras = Object.values(comprasObt);
-    })
+  constructor(private compraService:ComprasService, private detalleService:DetallesService, private loginService:LoginService){
+      this.compraService.obtenerCompras().subscribe(comprasObt => {
+        this.compras = Object.values(comprasObt);
+      })
   }
 
   cargarDetalles(idCompra:number, total:number){

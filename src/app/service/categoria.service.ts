@@ -12,7 +12,7 @@ export class CategoriaService {
   constructor(private http: HttpClient) {}
 
   obtenerCategorias() {
-    return this.http.get(this.apiUrl);
+    return this.http.get(this.apiUrl + '/listar');
   }
 
   agregarCategoria(categoria:Categoria){

@@ -15,10 +15,16 @@
             <a class="nav-link" href="/productos">Productos</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/compras">Mis listados</a>
+            <a class="nav-link" href="/compras" *ngIf="estaLogueado">Mis listados</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/listado">Listado actual</a>
+            <a class="nav-link" href="/listado" *ngIf="estaLogueado">Listado actual</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/login" *ngIf="!estaLogueado">Iniciar sesión</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="" (click)="cerrarSesion()" *ngIf="estaLogueado">Cerrar sesión</a>
           </li>
         </ul>
         <form class="d-flex" role="search" (submit)="buscarProducto()">

@@ -12,15 +12,15 @@ export class ProductoService {
   constructor(private http: HttpClient) {}
 
   obtenerProductos() {
-    return this.http.get(this.apiUrl);
+    return this.http.get(this.apiUrl + '/listar');
   }
 
   obtenerProductosPorCategoria(id: number) {
-    return this.http.get(this.apiUrl + '/' + id);
+    return this.http.get(this.apiUrl + '/listar/' + id);
   }
 
   obtenerProductosFiltrados(valorFiltro: string) {
-    return this.http.get(this.apiUrl + '/filtrado/' + valorFiltro);
+    return this.http.get(this.apiUrl + '/listar/filtrado/' + valorFiltro);
   }
 
   generarNuevoProducto(catId: string, producto: Producto) {

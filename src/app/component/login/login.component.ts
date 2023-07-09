@@ -20,9 +20,8 @@ export class LoginComponent {
   constructor(private loginService: LoginService, private router: Router) {}
 
   iniciarSesion(form: NgForm) {
-    this.loginService.iniciarSesion(this.creds).subscribe(response => {
-      console.log(response);
-      this.router.navigate(['/productos']);
+    this.loginService.iniciarSesion(this.creds).subscribe(() => {
+      this.router.navigate(['/compras']).then(() => window.location.reload());
     })
   }
 }
