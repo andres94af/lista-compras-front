@@ -6,38 +6,41 @@ import { CategoriaService } from 'src/app/service/categoria.service';
 @Component({
   selector: 'app-categorias',
   templateUrl: './categorias.component.html',
-  styles: [
-  ]
+  styles: [],
 })
 export class CategoriasComponent {
+  categorias: Categoria[];
+  categoria: Categoria;
+  nombreCategoria: string;
+  titulo: string = 'Categorías';
+  formAgregar: boolean = false;
 
-  categorias:Categoria[];
-  categoria:Categoria;
-  nombreCategoria:string;
-  titulo:string = "Categorías";
-  formAgregar:boolean = false;
-
-  constructor(private router:Router, private categoriaService:CategoriaService){
-    categoriaService.obtenerCategorias().subscribe(categoriasObt =>{
+  constructor(
+    private router: Router,
+    private categoriaService: CategoriaService
+  ) {
+    categoriaService.obtenerCategorias().subscribe((categoriasObt) => {
       this.categorias = Object.values(categoriasObt);
     });
   }
 
-  verProductosPorCategoria(id:number){
-    this.router.navigate(["productos/" + id]);
+  verProductosPorCategoria(id: number) {
+    this.router.navigate(['productos/' + id]);
   }
 
-  nuevaCategoria(){
+  nuevaCategoria() {
     this.formAgregar = true;
   }
 
-  agregarCategoria(){
-    if(this.nombreCategoria != undefined){
+  agregarCategoria() {
+    if (this.nombreCategoria != undefined) {
       this.categoria = new Categoria();
       this.categoria.nombre = this.nombreCategoria;
-      this.categoriaService.agregarCategoria(this.categoria).subscribe(datos => {
-        window.location.reload();
-      });
+      this.categoriaService
+        .agregarCategoria(this.categoria)
+        .subscribe((datos) => {
+          window.location.reload();
+        });
     }
   }
 }

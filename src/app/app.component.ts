@@ -32,6 +32,8 @@ export class AppComponent {
     this.loginService.cerrarSesion().subscribe();
     this.estaLogueado = false;
     sessionStorage.removeItem('token');
+    sessionStorage.removeItem('username');
+    sessionStorage.removeItem('lista_act');
     this.router.navigate(['']);
   }
 }

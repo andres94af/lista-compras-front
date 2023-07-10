@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { REST_API_URL } from '../models/models';
+import { DetalleCompra, REST_API_URL } from '../models/models';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { map } from 'rxjs';
 import { Router } from '@angular/router';
@@ -17,6 +17,7 @@ export class LoginService {
     return this.http.post(this.apiUrl, creds, {
       observe: 'response'
     }).pipe(map((response: HttpResponse<any>) => {
+      const listadoActualDetalles:DetalleCompra[] = [];
       const body = response.body;
       const headers = response.headers;
 
@@ -24,6 +25,7 @@ export class LoginService {
       const token = bearerToken.replace('Bearer ', '');
       const username = body.username;
       
+      sessionStorage.setItem("lista_act", JSON.stringify(listadoActualDetalles));
       sessionStorage.setItem('token', token);
       sessionStorage.setItem('username', username);
       return body;

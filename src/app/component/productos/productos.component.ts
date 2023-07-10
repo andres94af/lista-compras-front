@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Categoria, DetalleCompra, Producto } from 'src/app/models/models';
 import { CategoriaService } from 'src/app/service/categoria.service';
 import { CloudinaryService } from 'src/app/service/cloudinary.service';
@@ -131,13 +131,9 @@ export class ProductosComponent implements OnInit {
 
   agregarAListaActual() {
     if (this.cantidadProducto == 0 || this.cantidadProducto == null) return;
-    this.detalleService.agregarAListado(this.nuevoDetalle()).subscribe({
-      next: () => {
-        this.cantidadProducto = 0;
-        this.router.navigate(['listado']);
-      },
-      error: (err) => console.error('Error al subir la imagen', err),
-    });
+      this.detalleService.agregarAListado(this.nuevoDetalle());
+      this.cantidadProducto = 0;
+      this.router.navigate(['listado']);
   }
 
   nuevoDetalle() {

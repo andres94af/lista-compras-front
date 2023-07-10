@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Compra, REST_API_URL } from '../models/models';
+import { Compra, DetalleCompra, REST_API_URL } from '../models/models';
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +15,12 @@ export class ComprasService {
     return this.http.get(this.apiUrl + '/usuario');
   }
 
-  guardarCompra(compra:Compra){
-    return this.http.post(this.apiUrl, compra);
+  guardarCompra(compra:Compra, detalles:DetalleCompra[]){
+    const compraDetalle = {
+      compra: compra,
+      detalles: detalles
+    }
+    return this.http.post(this.apiUrl, compraDetalle);
   }
 
   eliminarCompra(compraId:number){

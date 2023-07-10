@@ -8,19 +8,25 @@ import { HttpClient } from '@angular/common/http';
 export class DetallesService {
 
   apiUrl: string = REST_API_URL + '/detalle';
-
-  constructor(private http:HttpClient) {}
+  
+  constructor(private http:HttpClient) {
+  }
 
   obtenerListadoActual(){
-    return this.http.get(this.apiUrl);
+    const listaDetalles = JSON.parse(sessionStorage.getItem("lista_act")!);
+    return listaDetalles;
   }
 
   agregarAListado(detalle:DetalleCompra) {
-    return this.http.post(this.apiUrl + '/agregar', detalle);
+    const listaActual = this.obtenerListadoActual();
+    listaActual.push(detalle);
+    sessionStorage.setItem("lista_act", JSON.stringify(listaActual));
+    return listaActual;
   }
 
   limpiarListaActual(){
-    return this.http.get(this.apiUrl + '/eliminar');
+    const listadoLimpio:DetalleCompra[] = [];
+    sessionStorage.setItem("lista_act", JSON.stringify(listadoLimpio));
   }
 
   obtenerDetalleCompra(id:number){
