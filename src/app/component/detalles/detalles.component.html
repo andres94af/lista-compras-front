@@ -15,12 +15,12 @@
       <tr *ngFor="let detalle of detalles, let i = index">
         <td>{{i + 1}}</td>
         <td>{{detalle.nombre}}</td>
-        <td>{{detalle.cantidad}}</td>
-        <td>{{detalle.precio}} €</td>
-        <td>{{detalle.total}} €</td>
+        <td>{{detalle.cantidad.toFixed(2)}}</td>
+        <td>{{detalle.precio.toFixed(2)}} €</td>
+        <td>{{detalle.total.toFixed(2)}} €</td>
       </tr>
     </tbody>
   </table>
-  <h6 class="text-end me-3">Total {{total}} €</h6>
+  <h6 class="text-end me-3">Total {{total.toFixed(2)}} €</h6>
 </div>
 </div>

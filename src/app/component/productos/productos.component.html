@@ -2,6 +2,7 @@
   <div class="row">
     <div class="col-md-8 mt-3">
       <h3>{{titulo}}</h3>
+      <hr>
       <!-- LISTADO DE PRODUCTOS -->
       <div class="row mb-3" *ngIf="listadoDeProductos.length > 0; else sinProductos">
         <div class="col-auto mt-3" *ngFor="let prod of listadoDeProductos">
@@ -9,10 +10,12 @@
         </div>
       </div>
       <ng-template #sinProductos>
-        <div>
-          <p>No hay productos :/</p>
+        <div class="text-center">
+          <h4 class="mb-3">No hay productos =(</h4>
+          <img src="../../../assets/sin-productos.png" style="width: 30%;">
         </div>
       </ng-template>
+
       <!-- BOTON PARA ABRIR EL FORMULARIO DE NUEVO PRODUCTO -->
       <div class="row" *ngIf="btnNuevoProducto">
         <div class="col-auto me-3 mt-4">
@@ -20,6 +23,7 @@
               +</strong></button>
         </div>
       </div>
+
       <!-- BOTON PARA ELIMINAR FILTROS -->
       <div class="row">
         <div class="col-auto me-3 mt-4" *ngIf="btnLimpiarFiltro">
@@ -35,7 +39,7 @@
         <div class="card-body">
           <h5 class="card-title">{{productoSeleccionado.nombre}}</h5>
           <p class="card-text">{{productoSeleccionado.informacion}}</p>
-          <h6 class="card-text">Precio: {{productoSeleccionado.precioUnitario}} €</h6>
+          <h6 class="card-text">Precio: {{productoSeleccionado.precioUnitario.toFixed(2)}} €</h6>
           <form class="row g-3" (submit)="agregarAListaActual()">
             <div class="col">
               <input type="number" step=".5" min="0" class="form-control bg-card" [(ngModel)]="cantidadProducto"
@@ -71,7 +75,6 @@
           </div>
         </div>
       </ng-template>
-
     </div>
   </div>
 </div>

@@ -2,6 +2,7 @@
   <div class="row">
     <div class="col-md-8">
       <h3>{{titulo}}</h3>
+      <hr>
       <div class="row">
         <div class="col-auto mt-3" *ngFor="let cat of categorias">
           <button class="btn btn-warning" (click)="verProductosPorCategoria(cat.id)">{{cat.nombre}}</button>

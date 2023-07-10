@@ -1,5 +1,10 @@
 <div class="container mt-3" *ngIf="!listaDetalleVacia(); else sinDetalles">
   <h3>{{titulo}}</h3>
+  <hr>
+  <div class="row">
+    <a type="button" class="btn btn-warning col-auto me-3 mb-2" href="/productos">Agregar productos</a>
+    <a type="button" class="btn btn-warning col-auto mb-2" href="/categorias">Ver categorias</a>
+  </div>
   <div class="row">
     <div class="card p-1 bg-card">
       <table class="table table-borderless text-center table-warning">
@@ -16,21 +21,19 @@
           <tr *ngFor="let detalle of listadoDeDetalles; let i = index">
             <td>{{i + 1}}</td>
             <td>{{detalle.nombre}}</td>
-            <td>{{detalle.cantidad}}</td>
-            <td>{{detalle.precio}} €</td>
-            <td>{{detalle.total}} €</td>
+            <td>{{detalle.cantidad.toFixed(2)}}</td>
+            <td>{{detalle.precio.toFixed(2)}} €</td>
+            <td>{{detalle.total.toFixed(2)}} €</td>
           </tr>
         </tbody>
       </table>
-      <h6 class="text-end me-3">Total compra {{totalLista}} €</h6>
+      <h6 class="text-end me-3">Total compra {{totalLista.toFixed(2)}} €</h6>
     </div>
   </div>
 
-  <div class="row">
-    <button class="btn btn-success col-auto me-3 mt-3" (click)="generarListado()">Guardar listado</button>
+  <div class="row justify-content-end">
     <button class="btn btn-danger col-auto me-3 mt-3" (click)="limpiarLista()">Borrar listado</button>
-    <a type="button" class="btn btn-warning col-auto me-3 mt-3" href="/productos">Agregar productos</a>
-    <a type="button" class="btn btn-warning col-auto mt-3" href="/categorias">Ver categorias</a>
+    <button class="btn btn-success col-auto me-3 mt-3" (click)="generarListado()">Guardar listado</button>
   </div>
 </div>
 

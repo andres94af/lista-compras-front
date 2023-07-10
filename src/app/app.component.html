@@ -9,16 +9,16 @@
       <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link" href="/categorias">Categorias</a>
-          </li>
-          <li class="nav-item">
             <a class="nav-link" href="/productos">Productos</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/compras" *ngIf="estaLogueado">Mis listados</a>
+            <a class="nav-link" href="/categorias">Categorias</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/listado" *ngIf="estaLogueado">Listado actual</a>
+            <a class="nav-link" href="/listado" *ngIf="estaLogueado">Lista en curso</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/compras" *ngIf="estaLogueado">Mis compras</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/login" *ngIf="!estaLogueado">Iniciar sesión</a>

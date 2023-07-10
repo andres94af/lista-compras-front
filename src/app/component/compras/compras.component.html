@@ -20,7 +20,7 @@
               <ng-template #finalizada>
                 <td>No</td>
               </ng-template>
-              <td>{{compra.total}} €</td>
+              <td>{{compra.total.toFixed(2)}} €</td>
               <td>
                 <div class="btn-group" role="group">
                  <button class="btn btn-warning btn-sm" (click)="cargarDetalles(compra.id, compra.total)">Detalle</button>
