@@ -44,3 +44,10 @@ export interface Credentials {
   username:string;
   password:string;
 }
+
+export interface NuevoUsuario {
+  nombre: string;
+  apellido: string;
+  username: string;
+  password: string;
+}

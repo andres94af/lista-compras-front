@@ -8,6 +8,7 @@ import { ListadoComponent } from './component/listado/listado.component';
 import { LoginComponent } from './component/login/login.component';
 import { LoginGuard } from './helpers/login.guard';
 import { AuthGuard } from './helpers/auth.guard';
+import { RegistroComponent } from './component/registro/registro.component';
 
 const routes: Routes = [
   { path: '', component: InicioComponent },
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'productos', component: ProductosComponent },
   { path: 'productos/:idCategoria', component: ProductosComponent },
   { path: 'productos/busqueda/:valorBusqueda', component: ProductosComponent },
+  { path: 'registro', component: RegistroComponent, canActivate:[LoginGuard]  },
   { path: '**', component: InicioComponent },
 ];
 

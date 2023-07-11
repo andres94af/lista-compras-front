@@ -14,6 +14,7 @@ import { FooterComponent } from './component/footer/footer.component';
 import { ListadoComponent } from './component/listado/listado.component';
 import { LoginComponent } from './component/login/login.component';
 import { AuthInterceptor } from './helpers/auth.interceptor';
+import { RegistroComponent } from './component/registro/registro.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { AuthInterceptor } from './helpers/auth.interceptor';
     InicioComponent,
     FooterComponent,
     ListadoComponent,
-    LoginComponent
+    LoginComponent,
+    RegistroComponent
   ],
   imports: [
     BrowserModule,
