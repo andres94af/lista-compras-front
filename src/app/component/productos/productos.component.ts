@@ -4,6 +4,7 @@ import { Categoria, DetalleCompra, Producto } from 'src/app/models/models';
 import { CategoriaService } from 'src/app/service/categoria.service';
 import { CloudinaryService } from 'src/app/service/cloudinary.service';
 import { DetallesService } from 'src/app/service/detalles.service';
+import { LoginService } from 'src/app/service/login.service';
 import { ProductoService } from 'src/app/service/producto.service';
 
 @Component({
@@ -24,6 +25,7 @@ export class ProductosComponent implements OnInit {
 
   btnLimpiarFiltro: boolean = false;
   btnNuevoProducto:boolean = false;
+  btnAgregarAListaActual:boolean = false;
 
   cantidadProducto: number;
   datosFormulario = {
@@ -40,7 +42,8 @@ export class ProductosComponent implements OnInit {
     private productoService: ProductoService,
     private categoriaService: CategoriaService,
     private cloudinaryService: CloudinaryService,
-    private detalleService: DetallesService
+    private detalleService: DetallesService,
+    private loginService:LoginService
   ) {
     this.categoriaService.obtenerCategorias().subscribe({
       next: (categoriasObt) => {
@@ -53,6 +56,8 @@ export class ProductosComponent implements OnInit {
       this.paramIdCategoria = params.get('idCategoria');
       this.paramValorBusqueda = params.get('valorBusqueda');
     });
+
+    this.btnAgregarAListaActual = this.loginService.estaLogueado();
   }
 
   ngOnInit(): void {

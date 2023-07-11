@@ -41,6 +41,16 @@ export class LoginService {
   }
 
   cerrarSesion(){
-    return this.http.get(REST_API_URL + '/logout');
+    this.http.get(REST_API_URL + '/logout');
+    sessionStorage.removeItem('token');
+    sessionStorage.removeItem('username');
+    sessionStorage.removeItem('lista_act');
+  }
+
+  estaLogueado(){
+    if (this.obtenerToken()) {
+      return true;
+    }
+    return false;
   }
 }

@@ -10,15 +10,10 @@ import { LoginService } from './service/login.service';
 export class AppComponent {
   valorBusqueda: string = '';
   estaLogueado: boolean = false;
-  username: string = '';
 
   constructor(private router: Router, private loginService: LoginService) {
-    const token = this.loginService.obtenerToken();
     const username = this.loginService.obtenerUsername();
-    if (token) {
-      this.estaLogueado = true;
-      this.username = '(' + username + ')';
-    }
+    this.estaLogueado = this.loginService.estaLogueado();
   }
 
   buscarProducto() {
@@ -29,11 +24,13 @@ export class AppComponent {
   }
 
   cerrarSesion() {
-    this.loginService.cerrarSesion().subscribe();
-    this.estaLogueado = false;
-    sessionStorage.removeItem('token');
-    sessionStorage.removeItem('username');
-    sessionStorage.removeItem('lista_act');
-    this.router.navigate(['']);
+    var confirma: boolean = confirm(
+      'Se cerrará la sesión y se eliminara el listado en curso. ¿Está seguro?'
+    );
+    if (confirma) {
+      this.loginService.cerrarSesion();
+      this.estaLogueado = this.loginService.estaLogueado();
+      this.router.navigate(['']);
+    }
   }
 }

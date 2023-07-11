@@ -40,7 +40,7 @@
           <h5 class="card-title">{{productoSeleccionado.nombre}}</h5>
           <p class="card-text">{{productoSeleccionado.informacion}}</p>
           <h6 class="card-text">Precio: {{productoSeleccionado.precioUnitario.toFixed(2)}} €</h6>
-          <form class="row g-3" (submit)="agregarAListaActual()">
+          <form class="row g-3" (submit)="agregarAListaActual()" *ngIf="btnAgregarAListaActual">
             <div class="col">
               <input type="number" step=".5" min="0" class="form-control bg-card" [(ngModel)]="cantidadProducto"
                 name="cantidadProducto" placeholder="Cantidad" required>
@@ -61,7 +61,7 @@
               <input type="text" class="form-control bg-card" placeholder="Nombre" name="nombre"
                 [(ngModel)]="datosFormulario.nombre" required>
               <input type="text" class="form-control bg-card" placeholder="Información" name="informacion"
-                [(ngModel)]="datosFormulario.informacion" required>
+                [(ngModel)]="datosFormulario.informacion" required maxlength="250">
               <input type="file" class="form-control" (change)="cambioImagen($event)">
               <select class="form-select bg-card" name="idCategoria" [(ngModel)]="datosFormulario.idCategoria">
                 <option value="" disabled selected>-- Seleccione categoría --</option>
