@@ -40,7 +40,7 @@
           <h5 class="card-title">{{productoSeleccionado.nombre}}</h5>
           <p class="card-text">{{productoSeleccionado.informacion}}</p>
           <h6 class="card-text">Precio: {{productoSeleccionado.precioUnitario.toFixed(2)}} €</h6>
-          <form class="row g-3" (submit)="agregarAListaActual()" *ngIf="btnAgregarAListaActual">
+          <form class="row g-3" (submit)="agregarAListaActual()" *ngIf="estaLogueado">
             <div class="col">
               <input type="number" step=".5" min="0" class="form-control bg-card" [(ngModel)]="cantidadProducto"
                 name="cantidadProducto" placeholder="Cantidad" required>

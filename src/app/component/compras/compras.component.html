@@ -1,6 +1,5 @@
 <div class="container my-3">
   <div class="row">
-
     <div class="col-md-7 mb-3" *ngIf="!noTieneCompras(); else sinListados">
       <h3>{{titulo}}</h3>
       <div class="card p-1 bg-card">
@@ -8,23 +7,27 @@
           <thead>
             <tr>
               <th scope="col">Fecha</th>
-              <th scope="col">Completa</th>
               <th scope="col">Total</th>
+              <th scope="col">Completa</th>
               <th scope="col">Detalle</th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let compra of listadoDeCompras">
               <td>{{compra.fecha}}</td>
-              <td *ngIf="compra.completada; else finalizada">Si</td>
-              <ng-template #finalizada>
-                <td>No</td>
-              </ng-template>
               <td>{{compra.total.toFixed(2)}} €</td>
+              <td *ngIf="compra.completada; else finalizada"><button class="btn btn-success btn-sm"
+                  (click)="cambiarEstadoCompra(compra.id)"><i class="bi bi-clipboard-check"></i></button></td>
+              <ng-template #finalizada>
+                <td><button class="btn btn-warning btn-sm" (click)="cambiarEstadoCompra(compra.id)"><i
+                      class="bi bi-clipboard"></i></button></td>
+              </ng-template>
               <td>
                 <div class="btn-group" role="group">
-                 <button class="btn btn-warning btn-sm" (click)="cargarDetalles(compra.id, compra.total)"><i class="bi bi-search"></i></button>
-                 <button class="btn btn-danger btn-sm" (click)="eliminarCompra(compra.id)"><i class="bi bi-trash"></i></button>
+                  <button class="btn btn-warning btn-sm" (click)="cargarDetalles(compra.id, compra.total)"><i
+                      class="bi bi-search"></i></button>
+                  <button class="btn btn-danger btn-sm" (click)="eliminarCompra(compra.id)"><i
+                      class="bi bi-trash"></i></button>
                 </div>
               </td>
             </tr>
@@ -35,18 +38,17 @@
 
     <ng-template #sinListados>
       <div class="container mt-3 text-center">
-          <h3>Aún no ha generado listados de compras</h3>
-          <img src="../../../assets/listado-vacio.png" alt="Lista vacía" style="width: 40%; margin: 2rem;">
-          <div>
-            <a type="button" class="btn btn-warning me-3 col-auto" href="/productos">Agregar productos</a>
-            <a type="button" class="btn btn-warning col-auto" href="/categorias">Ver categorias</a>
-          </div>
+        <h3>Aún no ha generado listados de compras</h3>
+        <img src="../../../assets/listado-vacio.png" alt="Lista vacía" style="width: 40%; margin: 2rem;">
+        <div>
+          <a type="button" class="btn btn-warning me-3 col-auto" href="/productos">Agregar productos</a>
+          <a type="button" class="btn btn-warning col-auto" href="/categorias">Ver categorias</a>
+        </div>
       </div>
     </ng-template>
 
     <div class="col p-0">
       <app-detalles *ngIf="detalles" [detalles]="detalles" [total]="total"></app-detalles>
     </div>
-
   </div>
 </div>

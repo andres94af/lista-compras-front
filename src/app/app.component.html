@@ -24,7 +24,7 @@
             <a class="nav-link" href="/login" *ngIf="!estaLogueado">Iniciar sesión</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/productos" (click)="cerrarSesion()" *ngIf="estaLogueado">Cerrar sesión</a>
+            <a class="nav-link" href="/login" (click)="cerrarSesion()" *ngIf="estaLogueado">Cerrar sesión</a>
           </li>
         </ul>
         <form class="d-flex" role="search" (submit)="buscarProducto()">

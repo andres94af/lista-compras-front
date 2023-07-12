@@ -23,9 +23,9 @@ export class ProductosComponent implements OnInit {
   paramIdCategoria: any;
   paramValorBusqueda: any;
 
+  estaLogueado: boolean = false;
   btnLimpiarFiltro: boolean = false;
-  btnNuevoProducto:boolean = false;
-  btnAgregarAListaActual:boolean = false;
+  btnNuevoProducto: boolean = false;
 
   cantidadProducto: number;
   datosFormulario = {
@@ -43,7 +43,7 @@ export class ProductosComponent implements OnInit {
     private categoriaService: CategoriaService,
     private cloudinaryService: CloudinaryService,
     private detalleService: DetallesService,
-    private loginService:LoginService
+    private loginService: LoginService
   ) {
     this.categoriaService.obtenerCategorias().subscribe({
       next: (categoriasObt) => {
@@ -57,21 +57,23 @@ export class ProductosComponent implements OnInit {
       this.paramValorBusqueda = params.get('valorBusqueda');
     });
 
-    this.btnAgregarAListaActual = this.loginService.estaLogueado();
+    this.estaLogueado = this.loginService.estaLogueado();
   }
 
   ngOnInit(): void {
     //Si existe un parametro idCategoria asigna a la variable productos, los productos objtenidos filtrados por categoria
     if (this.paramIdCategoria != null) {
       this.productoService
-        .obtenerProductosPorCategoria(this.paramIdCategoria).subscribe({
+        .obtenerProductosPorCategoria(this.paramIdCategoria)
+        .subscribe({
           next: (productosObt) => {
             this.listadoDeProductos = Object.values(productosObt);
-            if (this.listadoDeProductos.length != 0) this.btnLimpiarFiltro = true;
+            if (this.listadoDeProductos.length != 0)
+              this.btnLimpiarFiltro = true;
           },
           error: (err) => console.log('Error al obtener productos', err),
         });
-    //Si existe un parametro valorBusqueda asigna a la variable productos, los productos obtenidos filtrados por nombre
+      //Si existe un parametro valorBusqueda asigna a la variable productos, los productos obtenidos filtrados por nombre
     } else if (this.paramValorBusqueda != null) {
       this.productoService
         .obtenerProductosFiltrados(this.paramValorBusqueda)
@@ -82,7 +84,7 @@ export class ProductosComponent implements OnInit {
           },
           error: (err) => console.log('Error al obtener productos', err),
         });
-    //Si no existe ninguno de los parametros anteriores retorna la lista completa de productos
+      //Si no existe ninguno de los parametros anteriores retorna la lista completa de productos
     } else {
       this.productoService.obtenerProductos().subscribe({
         next: (productosObt) => {
@@ -107,38 +109,43 @@ export class ProductosComponent implements OnInit {
   }
 
   guardarNuevoProducto() {
-    let producto: Producto = new Producto();
-    producto.nombre = this.datosFormulario.nombre;
-    producto.informacion = this.datosFormulario.informacion;
-    producto.precioUnitario = Number(this.datosFormulario.precioUnitario);
-    let catId: string = this.datosFormulario.idCategoria;
+    if (this.estaLogueado) {
+      let producto: Producto = new Producto();
+      producto.nombre = this.datosFormulario.nombre;
+      producto.informacion = this.datosFormulario.informacion;
+      producto.precioUnitario = Number(this.datosFormulario.precioUnitario);
+      let catId: string = this.datosFormulario.idCategoria;
 
-    if (
-      producto.nombre == '' ||
-      producto.informacion == '' ||
-      catId == '' ||
-      producto.precioUnitario == 0 ||
-      !this.img
-    )
-      return;
+      if (
+        producto.nombre == '' ||
+        producto.informacion == '' ||
+        catId == '' ||
+        producto.precioUnitario == 0 ||
+        !this.img
+      )
+        return;
 
-    this.cloudinaryService.subirImagen(this.img).subscribe({
-      next: (imageObt) => {
-        producto.imgUrl = imageObt.secure_url;
-        producto.imgId = imageObt.public_id;
-        this.productoService
-          .generarNuevoProducto(catId, producto)
-          .subscribe((): void => this.verFormularioNuevoProducto());
-      },
-      error: (err) => console.error('Error al subir la imagen', err),
-    });
+      this.cloudinaryService.subirImagen(this.img).subscribe({
+        next: (imageObt) => {
+          producto.imgUrl = imageObt.secure_url;
+          producto.imgId = imageObt.public_id;
+          this.productoService
+            .generarNuevoProducto(catId, producto)
+            .subscribe((): void => this.verFormularioNuevoProducto());
+        },
+        error: (err) => console.error('Error al subir la imagen', err),
+      });
+    } else {
+      alert('Para agregar nuevos productos debe hacer login');
+      this.router.navigate(['/login']);
+    }
   }
 
   agregarAListaActual() {
     if (this.cantidadProducto == 0 || this.cantidadProducto == null) return;
-      this.detalleService.agregarAListado(this.nuevoDetalle());
-      this.cantidadProducto = 0;
-      this.router.navigate(['listado']);
+    this.detalleService.agregarAListado(this.nuevoDetalle());
+    this.cantidadProducto = 0;
+    this.router.navigate(['listado']);
   }
 
   nuevoDetalle() {

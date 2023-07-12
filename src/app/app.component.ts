@@ -30,7 +30,7 @@ export class AppComponent {
     if (confirma) {
       this.loginService.cerrarSesion();
       this.estaLogueado = this.loginService.estaLogueado();
-      this.router.navigate(['']);
+      this.router.navigate(['/login']);
     }
   }
 }
