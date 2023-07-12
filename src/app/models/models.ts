@@ -38,11 +38,9 @@ export class DetalleCompra {
   total: number;
 }
 
-export const REST_API_URL:string = "http://localhost:8080";
-
 export interface Credentials {
-  username:string;
-  password:string;
+  username: string;
+  password: string;
 }
 
 export interface NuevoUsuario {
@@ -51,3 +49,7 @@ export interface NuevoUsuario {
   username: string;
   password: string;
 }
+
+// export const REST_API_URL:string = "http://localhost:8080";
+export const REST_API_URL: string =
+  'http://lista-compras-api-rest-env.eba-22x8mxti.eu-north-1.elasticbeanstalk.com';
