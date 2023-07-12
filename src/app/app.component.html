@@ -9,22 +9,22 @@
       <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link" href="/productos">Productos</a>
+            <a class="nav-link" routerLink="/productos">Productos</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/categorias">Categorias</a>
+            <a class="nav-link" routerLink="/categorias">Categorias</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/listado" *ngIf="estaLogueado">Lista en curso</a>
+            <a class="nav-link" routerLink="/listado" *ngIf="estaLogueado">Lista en curso</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/compras" *ngIf="estaLogueado">Mis compras</a>
+            <a class="nav-link" routerLink="/compras" *ngIf="estaLogueado">Mis compras</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/login" *ngIf="!estaLogueado">Iniciar sesión</a>
+            <a class="nav-link" routerLink="/login" *ngIf="!estaLogueado">Iniciar sesión</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/login" (click)="cerrarSesion()" *ngIf="estaLogueado">Cerrar sesión</a>
+            <a class="nav-link" routerLink="/login" (click)="cerrarSesion()" *ngIf="estaLogueado">Cerrar sesión</a>
           </li>
         </ul>
         <form class="d-flex" role="search" (submit)="buscarProducto()">
