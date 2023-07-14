@@ -50,6 +50,6 @@ export interface NuevoUsuario {
   password: string;
 }
 
-// export const REST_API_URL:string = "http://localhost:8080";
-export const REST_API_URL: string =
-  'http://lista-compras-api-rest-env.eba-22x8mxti.eu-north-1.elasticbeanstalk.com';
+// export const REST_API_URL:string = "http://localhost:8080"; // REST LOCALHOST Y BBDD LOCALHOST
+export const REST_API_URL:string = "http://localhost:5000"; // REST LOCALHOST Y BBDD RDS
+// export const REST_API_URL: string ='http://lista-compras.us-east-1.elasticbeanstalk.com'; //AWS - REST ELACTIC BEANSTALK Y BBDD RDS
